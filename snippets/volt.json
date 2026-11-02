@@ -1,0 +1,465 @@
+{
+  "comment": {
+    "prefix": "comment",
+    "description": "Comment. Everything between {# and #} is ignored by the compiler.",
+    "body": ["{# $1 #}"]
+  },
+  "var": {
+    "prefix": "var",
+    "description": "Print the result of an expression.",
+    "body": ["{{ $1 }}"]
+  },
+  "tag": {
+    "prefix": "tag",
+    "description": "Statement delimiter for control structures and assignments.",
+    "body": ["{% $1 %}"]
+  },
+  "extends": {
+    "prefix": "extends",
+    "description": "Inherit from a parent template. Must be the first statement in the template.",
+    "body": ["{% extends '${1:templates/base.volt}' %}"]
+  },
+  "block": {
+    "prefix": "block",
+    "description": "Define a block that child templates can override.",
+    "body": ["{% block ${1:content} %}", "\t$0", "{% endblock %}"]
+  },
+  "endblock": {
+    "prefix": "endblock",
+    "description": "Close a block.",
+    "body": ["{% endblock %}"]
+  },
+  "super": {
+    "prefix": "super",
+    "description": "super(): render the parent block's content inside an overridden block.",
+    "body": ["{{ super() }}"]
+  },
+  "include": {
+    "prefix": "include",
+    "description": "Include a template. With the .volt extension it is compiled inline, without it the include happens at runtime.",
+    "body": ["{% include '${1:partials/footer}' %}"]
+  },
+  "include with": {
+    "prefix": "include with",
+    "description": "Include a template and pass variables to it.",
+    "body": [
+      "{% include '${1:partials/footer}' with ['${2:links}': ${3:links}] %}"
+    ]
+  },
+  "partial": {
+    "prefix": "partial",
+    "description": "partial(): render a partial view at runtime.",
+    "body": ["{{ partial('${1:partials/footer}') }}"]
+  },
+  "partial with": {
+    "prefix": "partial with",
+    "description": "partial(): render a partial view at runtime and pass variables to it.",
+    "body": [
+      "{{ partial('${1:partials/footer}', ['${2:links}': ${3:links}]) }}"
+    ]
+  },
+  "content": {
+    "prefix": "content",
+    "description": "content(): output the content produced in a previous rendering stage.",
+    "body": ["{{ content() }}"]
+  },
+  "get_content": {
+    "prefix": "get_content",
+    "description": "get_content(): same as content().",
+    "body": ["{{ get_content() }}"]
+  },
+  "if": {
+    "prefix": "if",
+    "description": "Conditional block, evaluated like the PHP if statement.",
+    "body": ["{% if ${1:condition} %}", "\t$0", "{% endif %}"]
+  },
+  "if else": {
+    "prefix": "if else",
+    "description": "Conditional block with an else branch.",
+    "body": [
+      "{% if ${1:condition} %}",
+      "\t$2",
+      "{% else %}",
+      "\t$0",
+      "{% endif %}"
+    ]
+  },
+  "elseif": {
+    "prefix": "elseif",
+    "description": "Additional condition inside an if block.",
+    "body": ["{% elseif ${1:condition} %}"]
+  },
+  "else": {
+    "prefix": "else",
+    "description": "Else branch of an if block, or of a for block when the iterable is empty.",
+    "body": ["{% else %}"]
+  },
+  "endif": {
+    "prefix": "endif",
+    "description": "Close an if block.",
+    "body": ["{% endif %}"]
+  },
+  "for": {
+    "prefix": "for",
+    "description": "Loop over each item of an iterable.",
+    "body": ["{% for ${1:item} in ${2:items} %}", "\t$0", "{% endfor %}"]
+  },
+  "for key": {
+    "prefix": "for key",
+    "description": "Loop over an iterable with access to keys, like PHP foreach ($items as $key => $value).",
+    "body": [
+      "{% for ${1:key}, ${2:value} in ${3:items} %}",
+      "\t$0",
+      "{% endfor %}"
+    ]
+  },
+  "for if": {
+    "prefix": "for if",
+    "description": "Loop over the items that match a condition.",
+    "body": [
+      "{% for ${1:item} in ${2:items} if ${3:condition} %}",
+      "\t$0",
+      "{% endfor %}"
+    ]
+  },
+  "for else": {
+    "prefix": "for else",
+    "description": "Loop with a branch rendered when the iterable is empty.",
+    "body": [
+      "{% for ${1:item} in ${2:items} %}",
+      "\t$3",
+      "{% elsefor %}",
+      "\t$0",
+      "{% endfor %}"
+    ]
+  },
+  "for range": {
+    "prefix": "for range",
+    "description": "Loop over a range of numbers or letters, e.g. 1..10 or 'a'..'z'.",
+    "body": ["{% for ${1:i} in ${2:1}..${3:10} %}", "\t$0", "{% endfor %}"]
+  },
+  "for nested": {
+    "prefix": "for nested",
+    "description": "Nested loops over a collection and its children.",
+    "body": [
+      "{% for ${1:item} in ${2:items} %}",
+      "\t{% for ${3:child} in ${1:item}.${4:children} %}",
+      "\t\t$0",
+      "\t{% endfor %}",
+      "{% endfor %}"
+    ]
+  },
+  "elsefor": {
+    "prefix": "elsefor",
+    "description": "Branch of a for block rendered when the iterable is empty. Alias of else.",
+    "body": ["{% elsefor %}"]
+  },
+  "endfor": {
+    "prefix": "endfor",
+    "description": "Close a for block.",
+    "body": ["{% endfor %}"]
+  },
+  "continue": {
+    "prefix": "continue",
+    "description": "Skip to the next iteration of the loop.",
+    "body": ["{% continue %}"]
+  },
+  "break": {
+    "prefix": "break",
+    "description": "Stop the loop, or end a case inside a switch.",
+    "body": ["{% break %}"]
+  },
+  "loop.index": {
+    "prefix": "loop.index",
+    "description": "Current iteration of the loop, 1-indexed.",
+    "body": ["{{ loop.index }}"]
+  },
+  "loop.index0": {
+    "prefix": "loop.index0",
+    "description": "Current iteration of the loop, 0-indexed.",
+    "body": ["{{ loop.index0 }}"]
+  },
+  "loop.revindex": {
+    "prefix": "loop.revindex",
+    "description": "Number of iterations from the end of the loop, 1-indexed.",
+    "body": ["{{ loop.revindex }}"]
+  },
+  "loop.revindex0": {
+    "prefix": "loop.revindex0",
+    "description": "Number of iterations from the end of the loop, 0-indexed.",
+    "body": ["{{ loop.revindex0 }}"]
+  },
+  "loop.length": {
+    "prefix": "loop.length",
+    "description": "Number of items to iterate.",
+    "body": ["{{ loop.length }}"]
+  },
+  "loop.first": {
+    "prefix": "loop.first",
+    "description": "True if the current iteration is the first one.",
+    "body": ["{% if loop.first %}", "\t$0", "{% endif %}"]
+  },
+  "loop.last": {
+    "prefix": "loop.last",
+    "description": "True if the current iteration is the last one.",
+    "body": ["{% if loop.last %}", "\t$0", "{% endif %}"]
+  },
+  "switch": {
+    "prefix": "switch",
+    "description": "Switch block, evaluated like the PHP switch statement. Use break to prevent fall-through. Nested switches are not supported.",
+    "body": [
+      "{% switch ${1:value} %}",
+      "\t{% case ${2:0} %}",
+      "\t\t$3",
+      "\t\t{% break %}",
+      "\t{% default %}",
+      "\t\t$0",
+      "{% endswitch %}"
+    ]
+  },
+  "case": {
+    "prefix": "case",
+    "description": "Case branch inside a switch block.",
+    "body": ["{% case ${1:value} %}", "\t$0", "\t{% break %}"]
+  },
+  "default": {
+    "prefix": "default",
+    "description": "Default branch inside a switch block.",
+    "body": ["{% default %}", "\t$0"]
+  },
+  "endswitch": {
+    "prefix": "endswitch",
+    "description": "Close a switch block.",
+    "body": ["{% endswitch %}"]
+  },
+  "set": {
+    "prefix": "set",
+    "description": "Assign a value to a variable. Supports =, +=, -=, *= and /=.",
+    "body": ["{% set ${1:name} = ${2:value} %}"]
+  },
+  "do": {
+    "prefix": "do",
+    "description": "Evaluate an expression without printing the result.",
+    "body": ["{% do ${1:expression} %}"]
+  },
+  "autoescape": {
+    "prefix": "autoescape",
+    "description": "Enable or disable automatic escaping of printed expressions inside the block.",
+    "body": ["{% autoescape ${1:true} %}", "\t$0", "{% endautoescape %}"]
+  },
+  "endautoescape": {
+    "prefix": "endautoescape",
+    "description": "Close an autoescape block.",
+    "body": ["{% endautoescape %}"]
+  },
+  "verbatim": {
+    "prefix": "verbatim",
+    "description": "Output the enclosed content without parsing it as Volt.",
+    "body": ["{% verbatim %}", "\t$0", "{% endverbatim %}"]
+  },
+  "macro": {
+    "prefix": "macro",
+    "description": "Define a reusable macro. Arguments can have default values and be passed by name.",
+    "body": ["{%- macro ${1:name}(${2:params}) %}", "\t$0", "{%- endmacro %}"]
+  },
+  "endmacro": {
+    "prefix": "endmacro",
+    "description": "Close a macro.",
+    "body": ["{%- endmacro %}"]
+  },
+  "return": {
+    "prefix": "return",
+    "description": "Return a value from a macro.",
+    "body": ["{% return ${1:value} %}"]
+  },
+  "json_encode": {
+    "prefix": "json_encode",
+    "description": "json_encode filter: convert a value into its JSON representation.",
+    "body": ["{% set ${1:encoded} = ${2:value}|json_encode %}"]
+  },
+  "json_decode": {
+    "prefix": "json_decode",
+    "description": "json_decode filter: convert a JSON string into a PHP value.",
+    "body": ["{% set ${1:decoded} = ${2:value}|json_decode %}"]
+  },
+  "dump": {
+    "prefix": "dump",
+    "description": "dump(): call PHP var_dump() on a variable.",
+    "body": ["{{ dump(${1:variable}) }}"]
+  },
+  "constant": {
+    "prefix": "constant",
+    "description": "constant(): read a PHP constant.",
+    "body": ["{{ constant('${1:CONSTANT_NAME}') }}"]
+  },
+  "url": {
+    "prefix": "url",
+    "description": "url(): generate a URL using the url service.",
+    "body": ["{{ url('${1:path}') }}"]
+  },
+  "url with": {
+    "prefix": "url with",
+    "description": "url(): generate a URL with query arguments using the url service.",
+    "body": ["{{ url('${1:path}', ['${2:key}': ${3:value}]) }}"]
+  },
+  "static_url": {
+    "prefix": "static_url",
+    "description": "static_url(): generate a URL to a static resource using the url service.",
+    "body": ["{{ static_url('${1:css/app.css}') }}"]
+  },
+  "date": {
+    "prefix": "date",
+    "description": "date(): call the PHP function with the same name.",
+    "body": ["{{ date('${1:Y-m-d}') }}"]
+  },
+  "time": {
+    "prefix": "time",
+    "description": "time(): call the PHP function with the same name.",
+    "body": ["{{ time() }}"]
+  },
+  "version": {
+    "prefix": "version",
+    "description": "version(): return the current version of the framework.",
+    "body": ["{{ version() }}"]
+  },
+  "version_id": {
+    "prefix": "version_id",
+    "description": "version_id(): return the current version id of the framework.",
+    "body": ["{{ version_id() }}"]
+  },
+  "a": {
+    "prefix": "a",
+    "description": "a(): anchor tag (Phalcon\\Html\\Helper\\Anchor).",
+    "body": ["{{ a('${1:/}', '${2:text}') }}"]
+  },
+  "img": {
+    "prefix": "img",
+    "description": "img(): image tag (Phalcon\\Html\\Helper\\Img).",
+    "body": ["{{ img('${1:img/logo.png}') }}"]
+  },
+  "form": {
+    "prefix": "form",
+    "description": "form(): opening form tag (Phalcon\\Html\\Helper\\Form). Close it with close('form').",
+    "body": [
+      "{{ form(['action': '${1:/}', 'method': '${2:post}']) }}",
+      "\t$0",
+      "{{ close('form') }}"
+    ]
+  },
+  "close": {
+    "prefix": "close",
+    "description": "close(): closing tag for an element (Phalcon\\Html\\Helper\\Close).",
+    "body": ["{{ close('${1:form}') }}"]
+  },
+  "label": {
+    "prefix": "label",
+    "description": "label(): label tag (Phalcon\\Html\\Helper\\Label).",
+    "body": ["{{ label('${1:text}', ['for': '${2:id}']) }}"]
+  },
+  "inputText": {
+    "prefix": "inputText",
+    "description": "inputText(): text input (Phalcon\\Html\\Helper\\Input\\Text).",
+    "body": ["{{ inputText('${1:name}') }}"]
+  },
+  "inputPassword": {
+    "prefix": "inputPassword",
+    "description": "inputPassword(): password input (Phalcon\\Html\\Helper\\Input\\Password).",
+    "body": ["{{ inputPassword('${1:password}') }}"]
+  },
+  "inputHidden": {
+    "prefix": "inputHidden",
+    "description": "inputHidden(): hidden input (Phalcon\\Html\\Helper\\Input\\Hidden).",
+    "body": ["{{ inputHidden('${1:name}', ${2:value}) }}"]
+  },
+  "inputEmail": {
+    "prefix": "inputEmail",
+    "description": "inputEmail(): email input (Phalcon\\Html\\Helper\\Input\\Email).",
+    "body": ["{{ inputEmail('${1:email}') }}"]
+  },
+  "inputTextarea": {
+    "prefix": "inputTextarea",
+    "description": "inputTextarea(): textarea (Phalcon\\Html\\Helper\\Input\\Textarea).",
+    "body": ["{{ inputTextarea('${1:name}') }}"]
+  },
+  "inputSubmit": {
+    "prefix": "inputSubmit",
+    "description": "inputSubmit(): submit button (Phalcon\\Html\\Helper\\Input\\Submit).",
+    "body": ["{{ inputSubmit('${1:submit}', '${2:Save}') }}"]
+  },
+  "link_to": {
+    "prefix": "link_to",
+    "description": "link_to(): anchor tag (legacy Phalcon\\Tag::linkTo).",
+    "body": ["{{ link_to('${1:path}', '${2:text}') }}"]
+  },
+  "image": {
+    "prefix": "image",
+    "description": "image(): image tag (legacy Phalcon\\Tag::image).",
+    "body": ["{{ image('${1:img/logo.png}') }}"]
+  },
+  "stylesheet_link": {
+    "prefix": "stylesheet_link",
+    "description": "stylesheet_link(): link tag for a CSS file (legacy Phalcon\\Tag::stylesheetLink).",
+    "body": ["{{ stylesheet_link('${1:css/app.css}') }}"]
+  },
+  "javascript_include": {
+    "prefix": "javascript_include",
+    "description": "javascript_include(): script tag for a JavaScript file (legacy Phalcon\\Tag::javascriptInclude).",
+    "body": ["{{ javascript_include('${1:js/app.js}') }}"]
+  },
+  "form_legacy": {
+    "prefix": "form_legacy",
+    "description": "form_legacy(): opening form tag (legacy Phalcon\\Tag::form). Close it with end_form().",
+    "body": [
+      "{{ form_legacy('${1:path}', 'method': '${2:post}') }}",
+      "\t$0",
+      "{{ end_form() }}"
+    ]
+  },
+  "end_form": {
+    "prefix": "end_form",
+    "description": "end_form(): closing form tag (legacy Phalcon\\Tag::endForm).",
+    "body": ["{{ end_form() }}"]
+  },
+  "text_field": {
+    "prefix": "text_field",
+    "description": "text_field(): text input (legacy Phalcon\\Tag::textField).",
+    "body": ["{{ text_field('${1:name}') }}"]
+  },
+  "password_field": {
+    "prefix": "password_field",
+    "description": "password_field(): password input (legacy Phalcon\\Tag::passwordField).",
+    "body": ["{{ password_field('${1:password}') }}"]
+  },
+  "hidden_field": {
+    "prefix": "hidden_field",
+    "description": "hidden_field(): hidden input (legacy Phalcon\\Tag::hiddenField).",
+    "body": ["{{ hidden_field('${1:name}') }}"]
+  },
+  "email_field": {
+    "prefix": "email_field",
+    "description": "email_field(): email input (legacy Phalcon\\Tag::emailField).",
+    "body": ["{{ email_field('${1:email}') }}"]
+  },
+  "check_field": {
+    "prefix": "check_field",
+    "description": "check_field(): checkbox input (legacy Phalcon\\Tag::checkField).",
+    "body": ["{{ check_field('${1:name}') }}"]
+  },
+  "text_area": {
+    "prefix": "text_area",
+    "description": "text_area(): textarea (legacy Phalcon\\Tag::textArea).",
+    "body": ["{{ text_area('${1:name}') }}"]
+  },
+  "select": {
+    "prefix": "select",
+    "description": "select(): select element built from a resultset (legacy Phalcon\\Tag::select).",
+    "body": [
+      "{{ select('${1:name}', ${2:items}, 'using': ['${3:id}', '${4:name}']) }}"
+    ]
+  },
+  "submit_button": {
+    "prefix": "submit_button",
+    "description": "submit_button(): submit button (legacy Phalcon\\Tag::submitButton).",
+    "body": ["{{ submit_button('${1:Save}') }}"]
+  }
+}
