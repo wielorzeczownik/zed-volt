@@ -26,6 +26,7 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: write
+      pull-requests: read
     outputs:
       released: ${{ steps.bump.outputs.released }}
       version: ${{ steps.bump.outputs.version }}
