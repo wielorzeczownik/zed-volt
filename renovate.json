@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>wielorzeczownik/.github"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^extension\\.toml$/"],
+      "matchStrings": [
+        "repository = \"(?<depName>https://github\\.com/[^\"]+)\"\\s+commit = \"(?<currentDigest>[a-f0-9]{40})\""
+      ],
+      "currentValueTemplate": "main",
+      "datasourceTemplate": "git-refs"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^scripts/.+\\.sh$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n[A-Z_]+=(?<currentValue>\\S+)"
+      ]
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["custom.regex"],
+      "matchFileNames": ["extension.toml"],
+      "semanticCommitType": "fix",
+      "semanticCommitScope": "grammar"
+    }
+  ]
+}
