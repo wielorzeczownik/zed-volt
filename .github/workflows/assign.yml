@@ -1,0 +1,26 @@
+name: Assign
+
+on:
+  pull_request_target:
+    types: [opened]
+  issues:
+    types: [opened]
+
+permissions: {}
+
+jobs:
+  assign:
+    name: Assign
+    if: github.actor != 'renovate[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Assign to the maintainer
+        uses: pozil/auto-assign-issue@d6e511896e5f1d2408e74db74416647d8ff80c8c # v4.1.0
+        with:
+          assignees: ${{ github.repository_owner }}
+          issueNumber: ${{ github.event.pull_request.number || github.event.issue.number }}

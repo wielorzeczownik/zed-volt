@@ -1,0 +1,25 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.md'
+
+grammar:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'extension.toml'
+          - 'languages/**'
+
+snippets:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'snippets/**'
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'renovate.json'
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/workflows/**'
