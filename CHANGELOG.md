@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1](https://github.com/wielorzeczownik/zed-volt/compare/v0.1.0...v0.1.1) - 2026-11-03
+
+### Build System
+
+- Switch to upstream gbprod tree-sitter-twig (#4) ([b7e9938](https://github.com/wielorzeczownik/zed-volt/commit/b7e99381dd13a5cdeb4fdf3a1e98f698d0911109))
+
+### CI/CD
+
+- Count grammar changes as user-facing ([d0ed8af](https://github.com/wielorzeczownik/zed-volt/commit/d0ed8af8749ba4fb32f3588b24387fc19397a03c))
+
 ## [0.1.0] - 2026-11-02
 
 ### Features

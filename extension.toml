@@ -1,6 +1,6 @@
 id = "volt"
 name = "Volt"
-version = "0.1.0"
+version = "0.1.1"
 schema_version = 1
 authors = ["wielorzeczownik"]
 description = "Syntax highlighting and snippets for Phalcon Volt templates in Zed"
