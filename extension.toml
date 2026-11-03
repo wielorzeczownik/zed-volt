@@ -8,5 +8,5 @@ repository = "https://github.com/wielorzeczownik/zed-volt"
 snippets = "snippets/volt.json"
 
 [grammars.twig]
-repository = "https://github.com/jannisborgers/tree-sitter-twig"
-commit = "723926cff978453c40ee11ca8046de0cb248873c"
+repository = "https://github.com/gbprod/tree-sitter-twig"
+commit = "2208d2a3c3ee7ef378e97df2e51c18feb7ee9dfc"
