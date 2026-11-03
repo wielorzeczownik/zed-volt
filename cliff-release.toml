@@ -61,6 +61,7 @@ commit_parsers = [
   { message = "^docs", skip = true },
   { message = "^test", skip = true },
   { message = "^style", skip = true },
+  { message = "^build\\(grammar\\)", group = "<!-- 05 -->Grammar" },
   { message = "^build", skip = true },
   { message = "^ci", skip = true },
   { message = "^chore", skip = true },
