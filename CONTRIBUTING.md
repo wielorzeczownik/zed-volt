@@ -4,7 +4,7 @@ Thank you for considering a contribution. This document covers everything you ne
 
 ## Overview
 
-A [Zed](https://zed.dev) extension that adds syntax highlighting and snippets for [Phalcon Volt](https://docs.phalcon.io/latest/volt/) templates. It reuses the [tree-sitter-twig](https://github.com/jannisborgers/tree-sitter-twig) grammar and contains no executable code.
+A [Zed](https://zed.dev) extension that adds syntax highlighting and snippets for [Phalcon Volt](https://docs.phalcon.io/latest/volt/) templates. It reuses the [tree-sitter-twig](https://github.com/gbprod/tree-sitter-twig) grammar and contains no executable code.
 
 ## Project structure
 
