@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Before reporting, check if the issue already exists in [open issues](https://github.com/wielorzeczownik/zed-volt/issues).
+        Thanks for reporting. Any detail helps, but don't worry if you don't know all of it. If you have a moment, a quick look through [open issues](https://github.com/wielorzeczownik/zed-volt/issues) helps avoid duplicates.
 
   - type: textarea
     id: description
@@ -19,8 +19,6 @@ body:
     id: expected
     attributes:
       label: What did you expect?
-    validations:
-      required: true
 
   - type: dropdown
     id: area
@@ -40,16 +38,12 @@ body:
       label: Template sample
       description: The smallest piece of Volt that shows the problem.
       render: twig
-    validations:
-      required: true
 
   - type: input
     id: version
     attributes:
       label: Extension version
       placeholder: 'e.g. v0.1.0'
-    validations:
-      required: true
 
   - type: input
     id: zed_version
@@ -57,5 +51,3 @@ body:
       label: Zed version
       description: 'Shown in Zed under `zed: about`.'
       placeholder: 'e.g. 0.210.4'
-    validations:
-      required: true
