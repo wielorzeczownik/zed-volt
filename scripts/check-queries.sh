@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # renovate: datasource=npm depName=tree-sitter-cli
-TREE_SITTER_VERSION=0.27.1
+TREE_SITTER_VERSION=0.27.2
 
 cd "$(dirname "$0")/.."
 
